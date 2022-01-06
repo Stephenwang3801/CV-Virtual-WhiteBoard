@@ -39,12 +39,11 @@ class handDetector():
             myHand = self.results.multi_hand_landmarks[handNumber]
 
             for id, lm in enumerate(myHand.landmark):
-                # print(id, lm)
 
                 # converting x,y to integer dimension coords
                 h, w, c = img.shape
                 cx, cy = int(lm.x * w), int(lm.y * h)
-                #print(id, cx, cy)
+
 
                 self.lmList.append([id, cx, cy])
                 if draw:
@@ -69,36 +68,3 @@ class handDetector():
                 fingers.append(0)
 
         return fingers
-
-def main():
-    pTime = 0
-    cTime = 0
-
-    # capturing video
-    cap = cv2.VideoCapture(0)
-    detector = handDetector()
-
-    while True:
-        # Reading in the video capture
-        success, img = cap.read()
-        img = detector.findHands(img)
-        lmList = detector.findPosition(img)
-
-        if len(lmList) != 0:
-            print(lmList[4])
-
-        # Calculating FPS
-        cTime = time.time()
-        fps = 1 / (cTime - pTime)
-        pTime = cTime
-
-        # Putting FPS on screen
-        cv2.putText(img, str(int(fps)), (10, 70), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 255), 3)
-
-        # showing the image
-        cv2.imshow("Image", img)
-        cv2.waitKey(1)
-
-
-if __name__ == "__main__":
-    main()
