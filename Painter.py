@@ -7,9 +7,9 @@ folder_path = "Header"
 my_list = os.listdir(folder_path)
 palette = []
 canvas = np.zeros((720, 1280, 3), np.uint8)
-pt_size = 15
-thickness = 15
-current_color = (128, 128, 128)
+pt_size = 60
+thickness = 30
+current_color = (0, 0, 0)
 x_prev, y_prev = 0, 0
 
 # Reading in color palette overlay
@@ -88,8 +88,8 @@ while True:
                 thickness = 60
                 pt_size = 30
             else:
-                thickness = 15
-                pt_size = 15
+                thickness = 10
+                pt_size = 10
 
             # Drawing lines
             cv2.line(img, (x_prev, y_prev), (x_index, y_index), current_color, thickness)
